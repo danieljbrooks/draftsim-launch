@@ -5,10 +5,7 @@
 <head>
 <title> Draftsim - MTG Draft and Sealed Simulator - Page not found </title>
 
-<!-- css style sheet -->
-<link rel="stylesheet" type="text/css" href="reset.css">
-<link rel="stylesheet" type="text/css" href="draftsim.css">
-<link rel="shortcut icon" href="favicon.ico">
+<?php include 'css.html'; ?>
 
 </head>
 

@@ -19,7 +19,7 @@ user-select: none;
 {
    padding 10px 10px 10px;
    padding: 0px;
-   max-width: 1600px;
+   max-width: 1620px;
    min-height: 632px;
    margin: auto;
    display: block
@@ -372,4 +372,8 @@ b{
   -ms-user-select: text; /* IE10+ */
   -o-user-select: text;
   user-select: text;
+}
+
+.clickable_card {
+	padding : 0px 3px;
 }

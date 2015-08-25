@@ -861,7 +861,7 @@ function Print_collection(){
  //Set up pack card images properly
  for (i = 0; i < pack_length; i++) {
    var cur_html = document.getElementById("pack_images").innerHTML;
-   var extra_html = "<img src=" + draft.players[0].pack.pack_contents[i].image +  " id=card_" + i + " onclick=make_pick(" + i + ") />";
+   var extra_html = "<img class=\"clickable_card\" src=" + draft.players[0].pack.pack_contents[i].image +  " id=card_" + i + " onclick=make_pick(" + i + ") />";
    document.getElementById("pack_images").innerHTML = cur_html + extra_html;
  }
 

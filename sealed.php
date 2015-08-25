@@ -3,9 +3,7 @@
 <head>
 <title> draftsim - sealed </title>
 
-<!-- css style sheet -->  
-<link rel="stylesheet" type="text/css" href="draftsim.css">
-<link rel="shortcut icon" href="favicon.ico">
+<?php include 'css.html'; ?>
 
 <!-- google analytics -->
 <script>

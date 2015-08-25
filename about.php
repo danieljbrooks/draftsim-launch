@@ -6,11 +6,7 @@
 <meta name="keywords" content="MTG", "draftsim","draft","sealed generator","magic","ORI","Magic Origins","dragons","DTK","DDF", "booster", "draft simulator">
 <meta name="author" content="Daniel Brooks">
 
-
-<!-- css style sheet --> 
-<link rel="stylesheet" type="text/css" href="reset.css"> 
-<link rel="stylesheet" type="text/css" href="draftsim.css">
-<link rel="shortcut icon" href="favicon.ico">
+<?php include 'css.html'; ?>
 
 <!-- google analytics -->
 <script>
