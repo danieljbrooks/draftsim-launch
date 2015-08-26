@@ -861,7 +861,10 @@ function Print_collection(){
  //Set up pack card images properly
  for (i = 0; i < pack_length; i++) {
    var cur_html = document.getElementById("pack_images").innerHTML;
-   var extra_html = "<img src=" + draft.players[0].pack.pack_contents[i].image +  " id=card_" + i + " onclick=make_pick(" + i + ") />";
+   var card = draft.players[0].pack.pack_contents[i];
+   var card_name = card.name.replace(/_/g, " ");
+   var extra_html = "<img src=" + card.image +  " alt=\"" + card_name + "\" title=\"" + card_name + "\" "
+                  + "id=card_" + i + " onclick=make_pick(" + i + ") />";
    document.getElementById("pack_images").innerHTML = cur_html + extra_html;
  }
 
@@ -1045,6 +1048,18 @@ if(draft.players[0].pack.pack_contents.length==0){
 
 
 
+var ImagePreloader = function() {
+    this.images = {};
+};
+
+ImagePreloader.prototype.preload_image = function(image_url) {
+    var image = new Image();
+    image.src = image_url;
+    this.images[image_url] = image;
+}
+
+var image_preloader = new ImagePreloader();
+
 function make_pick(card_index){
 
 //player picks
@@ -1096,6 +1111,14 @@ Print_collection();
 
 }}
 
+//Preload the images in the next bot's pack
+function preload_bot_images(bot) {
+  for (var i = 0; i < bot.pack.pack_contents.length; i++) {
+    var card = bot.pack.pack_contents[i];
+    image_preloader.preload_image(card.image);
+  }
+};
+
 //Pass cards to left or right (+1,-1)
 function pass_cards(pass_amount){
   var tmp_packs=['1', '2', '3', '4', '5', '6', '7', '8']; //dummy initialization
@@ -1112,6 +1135,10 @@ function pass_cards(pass_amount){
   for (i=0; i<num_players; i++){
     draft.players[i].pack=tmp_packs[i];
   }
+
+  //The bot that's going to pass to the player next
+  var next_bot_index = (num_players - pass_amount) % num_players;
+  preload_bot_images(draft.players[next_bot_index]);
   
   }
 
