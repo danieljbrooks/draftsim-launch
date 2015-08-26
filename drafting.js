@@ -861,7 +861,10 @@ function Print_collection(){
  //Set up pack card images properly
  for (i = 0; i < pack_length; i++) {
    var cur_html = document.getElementById("pack_images").innerHTML;
-   var extra_html = "<img src=" + draft.players[0].pack.pack_contents[i].image +  " id=card_" + i + " onclick=make_pick(" + i + ") />";
+   var card = draft.players[0].pack.pack_contents[i];
+   var card_name = card.name.replace(/_/g, " ");
+   var extra_html = "<img src=" + card.image +  " alt=\"" + card_name + "\" title=\"" + card_name + "\" "
+                  + "id=card_" + i + " onclick=make_pick(" + i + ") />";
    document.getElementById("pack_images").innerHTML = cur_html + extra_html;
  }
 
