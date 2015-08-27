@@ -8,9 +8,7 @@
 
 
 <!-- css style sheet --> 
-<link rel="stylesheet" type="text/css" href="reset.css"> 
-<link rel="stylesheet" type="text/css" href="draftsim.css">
-<link rel="shortcut icon" href="favicon.ico">
+<?php include 'css.html'; ?>
 
 <!-- google analytics -->
 <script>
@@ -39,11 +37,26 @@ Draftsim is a Magic: the Gathering draft simulator that allow you to: <br><br>
 <br><p>Comments and inquiries can be directed to email.draftsim@gmail.com</p>
 <br><p>I hope that you will find these tools useful, whether you are preparing for a limited tournament or simply exploring a new set. Enjoy!</p>
 
+
+<br><br>
+<h3> Updates/FAQ </h3><hr>
+Pick orders are based on Frank Karsten's pick order list articles. <br><br>
+<h4>Current development priorities:</h4>
+<p> - Curve and synergy bonuses [ ] </p>
+<p> - Balanced common color distribution [done] </p>
+<p> - Improved sorting [done] </p>
+<p> - Load next pack while waiting [done] </p>
+<p> - Battle for Zendikar release [ ] </p>
+<br><br>
+
 </div>
 
 <br><br>
 
-<!--<p class="disclaimer" style="font-size: 20px">Updated: August 2015</p>-->
+<img src="logo.png" alt="draft simulator logo" style="display:none">
+
+
+<!---<p class="disclaimer" style="font-size: 20px">Updated: August 2015</p>--->
 <p class="disclaimer" style="font-size:15px;max-width:400px;margin:auto;">The copyright for Magic: the Gathering and all associated card names and card images is held by Wizards of the Coast</p>
 <br>
 </body>

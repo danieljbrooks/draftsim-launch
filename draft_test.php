@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,9 @@
 
 
 <!-- css style sheet -->  
-<?php include 'css.html'; ?>
+<link rel="stylesheet" type="text/css" href="reset.css">
+<link rel="stylesheet" type="text/css" href="draftsim.css">
+<link rel="shortcut icon" href="favicon.ico">
 
 <!-- google analytics -->
 <script>
@@ -30,7 +33,7 @@
 <script src="FRF_lands.js"></script>
 <script src="ORI.js"></script>
 <script src="LANDS.js"></script>
-<script src="drafting.js"></script>
+<script src="drafting2.js"></script>
 
 <!-- HTML source code -->
 <?php include 'header.html'; ?>
@@ -107,12 +110,6 @@
   <p id="deck_text" class="display" style="display:none"> </p><br><br>
 </div>
 
-<!--
-<br>
-<div id="collection_container" class="display">
-  <p id="collection_img" class="display"> </p>
-</div>-->
-
 <div id="bot_collection_container" class="bot_decks" style:"display:none">
   <p id="bot_collection_img" class="display"> </p>
 </div>
@@ -123,5 +120,7 @@
 
 </body>
 </html>
+
+
 
 

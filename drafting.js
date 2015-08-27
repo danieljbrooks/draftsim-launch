@@ -78,7 +78,8 @@ function addLand(pn, land_num){
   //autosort deck on 40 cards
   var total_cards=draft.players[pn].deck.length+draft.players[pn].basiclands.length
   if (total_cards==40){
-    draft.players[pn].deck=draft.players[pn].deck.sort(sort_two( "creaturesort", {name:"cmc", primer: parseFloat, reverse:false}));
+    //draft.players[pn].deck=draft.players[pn].deck.sort(sort_two( "creaturesort", {name:"cmc", primer: parseFloat, reverse:false}));
+    draft.players[pn].deck= sortByMultiple ( draft.players[pn].deck, ["creaturesort", "cmc", "name"]);
   }
   //update the deck_text
   if(pn==0){
@@ -102,7 +103,8 @@ function Pack(card_list){
   var uncommon=0;
   var rare=0;
   var mythic=0;
-  
+  var common_colors=[0,0,0,0,0,0,0]; //WUBRG, artifacts, multi
+
   //Determine number of cards in set
   var cards_in_set=card_list.length
 
@@ -116,12 +118,14 @@ function Pack(card_list){
   
   //add cards without duplication
   var its=0; //prevent infinite loops
-  while(this.pack_contents.length<pack_size && its<10000){
+  max_its=10000;
+  while(this.pack_contents.length<pack_size && its<max_its){
     its=its+1;
     
     //choose a random card in the current set
     var card_roll=Math.floor((Math.random() * cards_in_set));
     var new_card = card_list[card_roll];
+    
     //Check if card in pack contents
     var card_in_pack=0;
     if (this.pack_contents.length>0){
@@ -132,9 +136,35 @@ function Pack(card_list){
       }
     }
     
+    //No more than 3 commons of a color
+    too_many=0;
+    var color_index = parseInt( card_list[card_roll].colorsort );
+    if (color_index < 5 && common_colors[color_index] > 2 && its<max_its/2){
+      too_many=1;
+    }
+    
+    //count unused colors
+    num_zeros=0;
+    for (var i=0; i<5; i++){
+      if (common_colors[i]==0){
+        num_zeros=num_zeros+1;
+      }
+    }
+    
+    //cards remaining (including this one)
+    num_cards_to_add = pack_size - this.pack_contents.length;
+    
+    //reroll if needed to ensure at least 1 common of each color in pack
+    if (num_cards_to_add<=num_zeros && ( (common_colors[color_index]!==0) || (color_index>4) ) && (its<(max_its/2)) ) {
+     // document.getElementById("debug").innerHTML="too many of: " + color_index + " its:" + its + " pack_length:" + this.pack_contents.length
+      too_many=1;
+    }
+    
+
+
     //Determine card rarity and add new card to pack if possible, in rarity order
     rarity_nc=new_card.rarity
-    if (card_in_pack<1){
+    if (card_in_pack<1 && too_many<1){
       if (rarity_nc=="M" && mythic < 1){
       	this.pack_contents.push(card_list[card_roll]);
       	mythic=mythic+1; 
@@ -146,7 +176,9 @@ function Pack(card_list){
       	uncommon=uncommon+1;
       } else if (rarity_nc=="C" && common < pack_size-4 && uncommon==3){
       	this.pack_contents.push(card_list[card_roll]);
-      	common=common+1;
+        var color_index = parseInt( card_list[card_roll].colorsort );
+	common_colors[color_index] = common_colors[color_index] + 1 ;
+	common=common+1;
       }
    }    
   }
@@ -184,6 +216,38 @@ var sort_by = function(field, reverse, primer){
    return function (a, b) {
        return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
      } 
+}
+
+//N-d Sorter
+//USAGE:    var sorted = sortByMultiple(patients, ["roomNumber", "name"]);
+function sortByMultiple(sequence, keys) {
+  var copy = copySequence(sequence);
+  copy.sort(function(x, y) {
+    var comparison = 0;
+    for (var i = 0; i < keys.length; ++i) {
+      comparison = compareBy(x, y, keys[i]);
+      if (comparison !== 0) {
+        return comparison;
+      }
+    }
+    return comparison;
+  });
+  return copy;
+}
+
+function compareBy(x, y, key) {
+  if (x[key] === y[key]) {
+    return 0;
+  }
+  return x[key] > y[key] ? 1 : -1;
+}
+
+function copySequence(sequence) {
+  var copy = [];
+  for (var i = 0; i < sequence.length; ++i) {
+    copy.push(sequence[i]);
+  }
+  return copy;
 }
 
 //2d Sorter
@@ -469,9 +533,11 @@ function move_2_deck(p, col_index){
   //autosort deck
   var total_cards=draft.players[p].deck.length+draft.players[p].basiclands.length
   //if (total_cards==40){
-    draft.players[p].deck=draft.players[p].deck.sort(sort_two( "creaturesort", {name:"cmc", primer: parseFloat, reverse:false}));
-  //}
-  
+//    draft.players[p].deck=draft.players[p].deck.sort(sort_two( "creaturesort", {name:"cmc", primer: parseFloat, reverse:false}));
+      draft.players[p].deck= sortByMultiple ( draft.players[p].deck, ["creaturesort", "cmc", "name"]);
+
+ //}
+ // 
   //update player deck text
   if(p==0){
     deck_text();
@@ -604,8 +670,11 @@ function clear_deck(pn){
     move_2_collection(pn, 0);
     it++;
   }
-  
-  draft.players[0].collection=draft.players[0].collection.sort(sort_two( "colorsort", {name:"cmc", primer: parseFloat, reverse:false}));
+ 
+
+  draft.players[0].collection= sortByMultiple ( draft.players[0].collection, ["colorsort", "creaturesort", "cmc", "name"]);
+
+  //draft.players[0].collection=draft.players[0].collection.sort(sort_two( "colorsort", {name:"cmc", primer: parseFloat, reverse:false}));
   Print_collection();
 
   //sort collection
@@ -762,7 +831,7 @@ function deck_text(){
   cur_html="//Deck from draftsim.com<br>";
   array_length=unique_array.length;
   for (var i=0; i<array_length; i++){
-    cur_html=cur_html+ counts[unique_array[i]].toString() + " " + unique_array[i].replace("_", ' ').replace("_", ' ').replace("_", ' ').replace("_", ' ').replace("_", ' ').replace("_", ' ')  + "<br>";
+    cur_html=cur_html+ counts[unique_array[i]].toString() + " " + unique_array[i].replace("_", ' ').replace("_", ' ').replace("_", ' ').replace("_", ' ').replace("_", ' ').replace("_", ' ')  + "  " + "<br>";
   }
   document.getElementById("deck_text").innerHTML=cur_html
   return;
@@ -788,13 +857,30 @@ function Print_collection(){
  } else {
   draft_start_visibility();
  } 
+ 
 
- //Set up the card images properly
+ //Set up pack card images properly 
  for (i = 0; i < pack_length; i++) {
    var cur_html = document.getElementById("pack_images").innerHTML;
-   var extra_html = "<img src=" + draft.players[0].pack.pack_contents[i].image +  " id=card_" + i + " onclick=make_pick(" + i + ") />";
+
+   var card = draft.players[0].pack.pack_contents[i];
+   var card_name = card.name.replace(/_/g, " ");
+   var extra_html = "<img src=" + card.image +  " alt=\"" + card_name + "\" title=\"" + card_name + "\" "+ "id=card_" + i + " onclick=make_pick(" + i + ") />";
+
    document.getElementById("pack_images").innerHTML = cur_html + extra_html;
  }
+
+ //Load next bot images when current ones are finished loading
+ tmp_pass_amount=-1;
+ var cards_picked = draft.players[0].collection.length + draft.players[0].deck.length
+ if (cards_picked <= pack_size-1 || cards_picked >= 2*pack_size ){
+   tmp_pass_amount=+1;
+ }
+ var next_bot_index = (num_players - tmp_pass_amount) % num_players;
+ if (num_players>1){
+   document.getElementById("pack_images").onload=preload_bot_images(draft.players[next_bot_index])
+ }
+
 
 // Find a <table> element 
 var tablep = document.getElementById("pack_text");
@@ -881,6 +967,25 @@ if(draft.players[0].pack.pack_contents.length==0){
   tablep.innerHTML="";
 }
 
+ //set visibility of sorting buttons, (one time use button)
+ if (draft.players[0].collection.length>0 && num_players>1 && (typeof sort_collection == "undefined")){
+   document.getElementById("sort_deck").style.display="inline";
+ } else {
+   document.getElementById("sort_deck").style.display="none";
+ }
+
+ //sort player collection, as needed
+ if (typeof sort_collection !== "undefined"){
+   //sort by color
+   if (sort_collection == 1){
+     draft.players[0].collection= sortByMultiple ( draft.players[0].collection, ["colorsort", "creaturesort", "cmc", "name"]);         
+   }
+   //sort by CMC
+   //if (sort_collection == 2){
+   //  draft.players[0].collection= sortByMultiple ( draft.players[0].collection, ["creaturesort", "cmc", "name"]);     
+   //}
+ }
+
  //display player collection properly
  collection_length=draft.players[0].collection.length;
  document.getElementById("collection_img").innerHTML = "";
@@ -955,6 +1060,18 @@ if(draft.players[0].pack.pack_contents.length==0){
 }
 
 
+//Download images for next pack
+var ImagePreloader = function() {
+    this.images = {};
+};
+
+ImagePreloader.prototype.preload_image = function(image_url) {
+    var image = new Image();
+    image.src = image_url;
+    this.images[image_url] = image;
+}
+
+var image_preloader = new ImagePreloader();
 
 
 function make_pick(card_index){
@@ -1008,6 +1125,14 @@ Print_collection();
 
 }}
 
+//Preload the images in the next bot's pack
+function preload_bot_images(bot) {
+  for (var i = 0; i < bot.pack.pack_contents.length; i++) {
+    var card = bot.pack.pack_contents[i];
+    image_preloader.preload_image(card.image);
+  }
+};
+
 //Pass cards to left or right (+1,-1)
 function pass_cards(pass_amount){
   var tmp_packs=['1', '2', '3', '4', '5', '6', '7', '8']; //dummy initialization
@@ -1025,7 +1150,12 @@ function pass_cards(pass_amount){
     draft.players[i].pack=tmp_packs[i];
   }
   
-  }
+  //Bot images loaded when current pack is done loading
+  //The bot that's going to pass to the player next
+  //var next_bot_index = (num_players - pass_amount) % num_players;
+  //preload_bot_images(draft.players[next_bot_index]);
+  
+}
 
  function bot_pick(bot_index){
 
@@ -1102,7 +1232,11 @@ function pass_cards(pass_amount){
   update_in_color(0); 
   
   //sort the pool 
-  draft.players[0].collection=draft.players[0].collection.sort(sort_two( "colorsort", {name:"cmc", primer: parseFloat, reverse:false}));
+//  draft.players[0].collection=draft.players[0].collection.sort(sort_two( "colorsort", {name:"cmc", primer: parseFloat, reverse:false}));
+  //draft.players[0].collection=draft.players[0].collection.sort(sort_two( "colorsort", {name:"cmc", primer: parseFloat, reverse:false}));
+  draft.players[0].collection= sortByMultiple ( draft.players[0].collection, ["colorsort", "creaturesort", "cmc", "name"]);
+   
+
   
   //Print the deck
   Print_collection();
@@ -1134,3 +1268,6 @@ window.onload = function(){
     document.getElementById("debug").innerHTML="Use the navigation bar above";
   }
 };
+
+
+
