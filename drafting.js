@@ -859,7 +859,11 @@ function Print_collection(){
  } 
  
 
+<<<<<<< HEAD
  //Set up pack card images properly 
+=======
+ //Set up pack card images properly
+>>>>>>> origin/master
  for (i = 0; i < pack_length; i++) {
    var cur_html = document.getElementById("pack_images").innerHTML;
 
@@ -1270,4 +1274,7 @@ window.onload = function(){
 };
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
