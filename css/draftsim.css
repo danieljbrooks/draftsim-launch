@@ -1,6 +1,6 @@
 body
 {
-    font-family : 'League Gothic Regular', 'Helvetica', 'Sans-Serif';
+    font-family : 'EB Garamond', serif, 'League Gothic Regular', 'Helvetica', 'Sans-Serif';
     padding     : 3px 3px 3px;
     font-size   : 32px;
     text-align  : center;
@@ -16,7 +16,7 @@ body
 
 @font-face
 {
-    font-family: 'League Gothic Regular';
+    font-family: 'EB Garamond', serif, 'League Gothic Regular';
     src: url('leaguegothic-regular-webfont.woff');
     font-weight: normal;
     font-style: normal;
