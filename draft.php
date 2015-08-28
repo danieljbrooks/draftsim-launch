@@ -90,11 +90,11 @@
 <!--lands-->
 <div id="lands" class="after_draft" style="display:none">
   <p>Basic lands:</p>
-  <img src=Images/ORI/Plains.png  onclick="addLand(0, 0); Print_collection();">
-  <img src=Images/ORI/Island.png onclick="addLand(0, 1); Print_collection();">
-  <img src=Images/ORI/Swamp.png onclick="addLand(0, 2); Print_collection();">
-  <img src=Images/ORI/Mountain.png onclick="addLand(0, 3); Print_collection();">
-  <img src=Images/ORI/Forest.png onclick="addLand(0, 4); Print_collection();">
+  <img src=Images/ORI/Plains.jpg  onclick="addLand(0, 0); Print_collection();">
+  <img src=Images/ORI/Island.jpg onclick="addLand(0, 1); Print_collection();">
+  <img src=Images/ORI/Swamp.jpg onclick="addLand(0, 2); Print_collection();">
+  <img src=Images/ORI/Mountain.jpg onclick="addLand(0, 3); Print_collection();">
+  <img src=Images/ORI/Forest.jpg onclick="addLand(0, 4); Print_collection();">
   <br>
 </div>
 
