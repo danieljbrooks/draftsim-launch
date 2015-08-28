@@ -857,34 +857,13 @@ function Print_collection(){
  } else {
   draft_start_visibility();
  } 
- 
 
-<<<<<<< HEAD
- //Set up pack card images properly 
-=======
  //Set up pack card images properly
->>>>>>> origin/master
  for (i = 0; i < pack_length; i++) {
    var cur_html = document.getElementById("pack_images").innerHTML;
-
-   var card = draft.players[0].pack.pack_contents[i];
-   var card_name = card.name.replace(/_/g, " ");
-   var extra_html = "<img src=" + card.image +  " alt=\"" + card_name + "\" title=\"" + card_name + "\" "+ "id=card_" + i + " onclick=make_pick(" + i + ") />";
-
+   var extra_html = "<img class=\"clickable_card\" src=" + draft.players[0].pack.pack_contents[i].image +  " id=card_" + i + " onclick=make_pick(" + i + ") />";
    document.getElementById("pack_images").innerHTML = cur_html + extra_html;
  }
-
- //Load next bot images when current ones are finished loading
- tmp_pass_amount=-1;
- var cards_picked = draft.players[0].collection.length + draft.players[0].deck.length
- if (cards_picked <= pack_size-1 || cards_picked >= 2*pack_size ){
-   tmp_pass_amount=+1;
- }
- var next_bot_index = (num_players - tmp_pass_amount) % num_players;
- if (num_players>1){
-   document.getElementById("pack_images").onload=preload_bot_images(draft.players[next_bot_index])
- }
-
 
 // Find a <table> element 
 var tablep = document.getElementById("pack_text");
@@ -1064,18 +1043,6 @@ if(draft.players[0].pack.pack_contents.length==0){
 }
 
 
-//Download images for next pack
-var ImagePreloader = function() {
-    this.images = {};
-};
-
-ImagePreloader.prototype.preload_image = function(image_url) {
-    var image = new Image();
-    image.src = image_url;
-    this.images[image_url] = image;
-}
-
-var image_preloader = new ImagePreloader();
 
 
 function make_pick(card_index){
@@ -1129,14 +1096,6 @@ Print_collection();
 
 }}
 
-//Preload the images in the next bot's pack
-function preload_bot_images(bot) {
-  for (var i = 0; i < bot.pack.pack_contents.length; i++) {
-    var card = bot.pack.pack_contents[i];
-    image_preloader.preload_image(card.image);
-  }
-};
-
 //Pass cards to left or right (+1,-1)
 function pass_cards(pass_amount){
   var tmp_packs=['1', '2', '3', '4', '5', '6', '7', '8']; //dummy initialization
@@ -1154,12 +1113,7 @@ function pass_cards(pass_amount){
     draft.players[i].pack=tmp_packs[i];
   }
   
-  //Bot images loaded when current pack is done loading
-  //The bot that's going to pass to the player next
-  //var next_bot_index = (num_players - pass_amount) % num_players;
-  //preload_bot_images(draft.players[next_bot_index]);
-  
-}
+  }
 
  function bot_pick(bot_index){
 
@@ -1274,7 +1228,3 @@ window.onload = function(){
 };
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title> Draftsim - MTG Draft and Sealed Simulator, Magic Origins, ORI </title>
+<title> draftsim - sealed </title>
 
 <?php include 'css.html'; ?>
 
@@ -19,11 +19,8 @@
 
 <body>
 <?php include 'header.html'; ?>
-<br>
 
 <br>
-<!--<p style="width:60%;margin-left: auto; margin-right:auto;"></p>-->
-</div>
+<p> Want to play sealed? It's on the draft page </p>
 </body>
-
 

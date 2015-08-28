@@ -1,18 +1,25 @@
-body {
-  
-  font:'LeagueGothicRegular'
-  padding: 3px 3px 3px;
-  font-size: 32px;
-  text-align: center;
-  background: #FFFFFF;
+body
+{
+    font-family : 'League Gothic Regular', 'Helvetica', 'Sans-Serif';
+    padding     : 3px 3px 3px;
+    font-size   : 32px;
+    text-align  : center;
+    background  : #FFFFFF;
 
-/* unselectable text*/
--webkit-user-select: none; /* Chrome/Safari */        
--moz-user-select: none; /* Firefox */
--ms-user-select: none; /* IE10+ */
--o-user-select: none;
-user-select: none;
+    /* unselectable text*/
+    -webkit-user-select : none; /* Chrome/Safari */
+    -moz-user-select    : none; /* Firefox */
+    -ms-user-select     : none; /* IE10+ */
+    -o-user-select      : none;
+    user-select         : none;
+}
 
+@font-face
+{
+    font-family: 'League Gothic Regular';
+    src: url('leaguegothic-regular-webfont.woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 #pack_box
@@ -253,19 +260,7 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 tr td:hover { opacity: .5;}
 /*tr td:hover { background: #666; color: #FFF; }*/ /* Hover cell effect! */
 
-*{
-font:'LeagueGothicRegular'
-
-/* unselectable text*/
--webkit-user-select: none; /* Chrome/Safari */        
--moz-user-select: none; /* Firefox */
--ms-user-select: none; /* IE10+ */
--o-user-select: none;
-user-select: none;
-
-}
-
-b{
+b {
     font-weight: bold;
 }
 
@@ -374,7 +369,6 @@ b{
   user-select: text;
 }
 
-clickable_card {
-	padding : 0px 3px;
+.clickable_card {
+    padding : 0px 3px;
 }
-

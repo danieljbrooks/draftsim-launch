@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title> draftsim - Magic Origins Draft and Sealed Simulator MTG </title>
+<title> draftsim - Methodology - Magic Origins Draft and Sealed Simulator MTG </title>
 <meta name="description" content="Draftsim - Methodology - Magic Origins draft and sealed simulator. Pick suggestions and automatic deckbuilding.">
 <meta name="keywords" content="MTG", "draftsim","draft","sealed generator", "methodology","magic","ORI","Magic Origins","dragons","DTK","DDF", "booster", "draft simulator">
 <meta name="author" content="Daniel Brooks">
 
-
-<!-- css style sheet --> 
 <?php include 'css.html'; ?>
 
 <!-- google analytics -->
@@ -52,7 +50,6 @@ Draftsim AI uses the following concepts to evaluate each card:<br>
 <!-- <h4>Curve:</h4><p>On-curve cards are given a bonus. The ideal curve contains 3+ two-drops, 4+ three drops, 1-3 tricks and 2+ removal spells. To be implemented.</p><br> -->
 </div>
 <br><br>
-
 
 <!---
 <br>

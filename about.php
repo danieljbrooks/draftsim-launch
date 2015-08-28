@@ -6,8 +6,6 @@
 <meta name="keywords" content="MTG", "draftsim","draft","sealed generator","magic","ORI","Magic Origins","dragons","DTK","DDF", "booster", "draft simulator">
 <meta name="author" content="Daniel Brooks">
 
-
-<!-- css style sheet --> 
 <?php include 'css.html'; ?>
 
 <!-- google analytics -->
@@ -37,26 +35,11 @@ Draftsim is a Magic: the Gathering draft simulator that allow you to: <br><br>
 <br><p>Comments and inquiries can be directed to email.draftsim@gmail.com</p>
 <br><p>I hope that you will find these tools useful, whether you are preparing for a limited tournament or simply exploring a new set. Enjoy!</p>
 
-
-<br><br>
-<h3> Updates/FAQ </h3><hr>
-Pick orders are based on Frank Karsten's pick order list articles. <br><br>
-<h4>Current development priorities:</h4>
-<p> - Curve and synergy bonuses [ ] </p>
-<p> - Balanced common color distribution [done] </p>
-<p> - Improved sorting [done] </p>
-<p> - Load next pack while waiting [done] </p>
-<p> - Battle for Zendikar release [ ] </p>
-<br><br>
-
 </div>
 
 <br><br>
 
-<img src="logo.png" alt="draft simulator logo" style="display:none">
-
-
-<!---<p class="disclaimer" style="font-size: 20px">Updated: August 2015</p>--->
+<!--<p class="disclaimer" style="font-size: 20px">Updated: August 2015</p>-->
 <p class="disclaimer" style="font-size:15px;max-width:400px;margin:auto;">The copyright for Magic: the Gathering and all associated card names and card images is held by Wizards of the Coast</p>
 <br>
 </body>
