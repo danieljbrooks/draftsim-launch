@@ -7,7 +7,7 @@
 <meta name="author" content="Daniel Brooks">
 
 
-<!-- css style sheet -->  
+<!-- css style sheet -->
 <?php include 'css.html'; ?>
 
 <!-- google analytics -->
@@ -59,13 +59,13 @@
 <ul id="commands" class="commands">
 
   <li id= " during_draft" class="during_draft" style="display:none;" onclick=toggle_suggestions()> Suggestions </li>
- 
+
   <li id = "bot_decks_button" class = "after_draft" style="display:none" onclick=toggle_bot_deck_visibility()> View Bots </li>
- 
+
   <li id = "build_deck" class = "after_draft" style="display:none" onclick=autobuild(0,draft.players[0].in_color);Print_collection();> Autobuild </li>
 
   <li id = "clear_deck" class = "after_draft" style="display:none" onclick=clear_deck(0)> Clear Deck </li>
-  
+
   <!--<li id = "update_deck_text" class = "after_draft" style="display:none" onclick=deck_text()> Deck Text </li> -->
  <!-- <li id = "bot_decks" class = "after_draft" style="display:none" onclick=autobuild_bots();Print_collection();> Bot Decks </li> -->
 
@@ -84,7 +84,7 @@
 
 <ul id="sort_deck" class="commands" style="display:none;">
  <br>
-  <li id="color_sort" style="display:inline" onclick="sort_collection=1;Print_collection();";> Color Sort </li> 
+  <li id="color_sort" style="display:inline" onclick="sort_collection=1;Print_collection();";> Color Sort </li>
 <!--  <li id="cmc_sort"   style="display:inline" onclick="sort_collection=2;Print_collection();";> CMC Sort </li> -->
 <br><br>
 </ul>
@@ -92,11 +92,11 @@
 <!--lands-->
 <div id="lands" class="after_draft" style="display:none">
   <p>Basic lands:</p>
-  <img src=Images/ORI/Plains.png  onclick="addLand(0, 0); Print_collection();">
-  <img src=Images/ORI/Island.png onclick="addLand(0, 1); Print_collection();">
-  <img src=Images/ORI/Swamp.png onclick="addLand(0, 2); Print_collection();">
-  <img src=Images/ORI/Mountain.png onclick="addLand(0, 3); Print_collection();">
-  <img src=Images/ORI/Forest.png onclick="addLand(0, 4); Print_collection();">
+  <img src=Images/ORI/Plains.jpg  onclick="addLand(0, 0); Print_collection();">
+  <img src=Images/ORI/Island.jpg onclick="addLand(0, 1); Print_collection();">
+  <img src=Images/ORI/Swamp.jpg onclick="addLand(0, 2); Print_collection();">
+  <img src=Images/ORI/Mountain.jpg onclick="addLand(0, 3); Print_collection();">
+  <img src=Images/ORI/Forest.jpg onclick="addLand(0, 4); Print_collection();">
   <br>
 </div>
 
