@@ -6,8 +6,8 @@
       display_element[i].style.display = 'inline';
   }
   document.getElementById('pack_box').style.display = 'block'; //pack_box needs block formatting
-  document.getElementById("bot_decks_button").innerHTML="View Bots"; //special case    
-  
+  document.getElementById("bot_decks_button").innerHTML="View Bots"; //special case
+
 
   var display_element = document.getElementsByClassName('after_draft'), i;
   for (i = 0; i < display_element.length; i += 1) {
@@ -27,7 +27,7 @@
   for (i = 0; i < display_element.length; i += 1) {
       display_element[i].style.display = 'inline';
   }
-  
+
 
   if (num_players<=1){
      document.getElementById('bot_decks_button').style.display='none';
@@ -39,9 +39,9 @@
 
  function toggle_bot_deck_visibility(){
   if(show_bot_decks==0){
-	  
+
     //document.body.scrollTop = document.documentElement.scrollTop = 0;
-   	  
+
     show_bot_decks=1;
     Print_collection();
     var target = document.getElementById('bot_collection_img');
@@ -51,7 +51,7 @@
     //location.hash = "#bot_collection_container";
   } else {
     show_bot_decks=0;
-    document.getElementById("bot_decks_button").innerHTML="View Bots";    
+    document.getElementById("bot_decks_button").innerHTML="View Bots";
   }
   Print_collection();
 }
@@ -91,13 +91,13 @@ return;
 
 
 //Initialize
- var draft = "..."; 
- var pack_size=14; 
+ var draft = "...";
+ var pack_size=14;
  var rating_thresh=2.0;
 
 function Pack(card_list){
   this.pack_contents=[];
-  
+
   //Define card contents
   var common=0;
   var uncommon=0;
@@ -115,17 +115,17 @@ function Pack(card_list){
   } else {
     rare=1;
   }
-  
+
   //add cards without duplication
   var its=0; //prevent infinite loops
   max_its=10000;
   while(this.pack_contents.length<pack_size && its<max_its){
     its=its+1;
-    
+
     //choose a random card in the current set
     var card_roll=Math.floor((Math.random() * cards_in_set));
     var new_card = card_list[card_roll];
-    
+
     //Check if card in pack contents
     var card_in_pack=0;
     if (this.pack_contents.length>0){
@@ -135,14 +135,14 @@ function Pack(card_list){
         }
       }
     }
-    
+
     //No more than 3 commons of a color
     too_many=0;
     var color_index = parseInt( card_list[card_roll].colorsort );
     if (color_index < 5 && common_colors[color_index] > 2 && its<max_its/2){
       too_many=1;
     }
-    
+
     //count unused colors
     num_zeros=0;
     for (var i=0; i<5; i++){
@@ -150,16 +150,16 @@ function Pack(card_list){
         num_zeros=num_zeros+1;
       }
     }
-    
+
     //cards remaining (including this one)
     num_cards_to_add = pack_size - this.pack_contents.length;
-    
+
     //reroll if needed to ensure at least 1 common of each color in pack
     if (num_cards_to_add<=num_zeros && ( (common_colors[color_index]!==0) || (color_index>4) ) && (its<(max_its/2)) ) {
      // document.getElementById("debug").innerHTML="too many of: " + color_index + " its:" + its + " pack_length:" + this.pack_contents.length
       too_many=1;
     }
-    
+
 
 
     //Determine card rarity and add new card to pack if possible, in rarity order
@@ -167,7 +167,7 @@ function Pack(card_list){
     if (card_in_pack<1 && too_many<1){
       if (rarity_nc=="M" && mythic < 1){
       	this.pack_contents.push(card_list[card_roll]);
-      	mythic=mythic+1; 
+      	mythic=mythic+1;
       } else if (rarity_nc=="R" && rare < 1 && mythic==1){
       	this.pack_contents.push(card_list[card_roll]);
       	rare=rare+1;
@@ -180,7 +180,7 @@ function Pack(card_list){
 	common_colors[color_index] = common_colors[color_index] + 1 ;
 	common=common+1;
       }
-   }    
+   }
   }
 
   //Special case, FRF, add dual-lands
@@ -207,15 +207,15 @@ function Pack(card_list){
 //homes.sort(sort_by('city', false, function(a){return a.toUpperCase()}));
 var sort_by = function(field, reverse, primer){
 
-   var key = primer ? 
-       function(x) {return primer(x[field])} : 
+   var key = primer ?
+       function(x) {return primer(x[field])} :
        function(x) {return x[field]};
 
    reverse = !reverse ? 1 : -1;
 
    return function (a, b) {
        return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
-     } 
+     }
 }
 
 //N-d Sorter
@@ -283,7 +283,7 @@ var sort_two = function() {
 
 
  function Draft(s1, s2, s3, n_players){
-  num_players=n_players; //make global variable 
+  num_players=n_players; //make global variable
 
   //Create an array of players
   this.players=[];
@@ -297,10 +297,10 @@ var sort_two = function() {
     var drafter_i= {pack:pack_i,collection:[], deck:[], basiclands:[], color_commit:[0,0,0,0,0],in_color:[1,1,1,1,1]};
     this.players.push(drafter_i);
   }
-} 
+}
 
- function update_in_color(p_index){ 
-  
+ function update_in_color(p_index){
+
   //define color commiting threshold
   color_commit_threshold=3.5;
 
@@ -312,7 +312,7 @@ var sort_two = function() {
   for (k=0;k<5;k++){
     temp_color_commit[k]=draft.players[p_index].color_commit[k];
   }
-  
+
   //find the maximum value
   max_index=0;
   second_index=0;
@@ -324,13 +324,13 @@ var sort_two = function() {
       max_value=cur_commit;
     }
   }
-  
+
   //if we are commited to at least 1 color
   if (max_value>color_commit_threshold){
     draft.players[p_index].in_color[max_index]=1;    //mark max as in_color
-    
+
     temp_color_commit[max_index]=-10;     //don't repeat the maximum value
-    
+
     //find the second_max value
     second_index=0;
     second_value=temp_color_commit[0];
@@ -341,10 +341,10 @@ var sort_two = function() {
         second_value=cur_commit;
       }
     }
- 
+
    if (second_value>color_commit_threshold) {
-     draft.players[p_index].in_color[second_index]=1; //mark second_max as in_color    
-   } 
+     draft.players[p_index].in_color[second_index]=1; //mark second_max as in_color
+   }
   } else {
     draft.players[p_index].in_color=[0,0,0,0,0];
   }
@@ -354,12 +354,12 @@ var sort_two = function() {
   time_to_commit=1*pack_size+3;
 
   if(total_cards>time_to_commit){
-     draft.players[p_index].in_color[max_index]=1; //mark second_max as in_color	   
-     draft.players[p_index].in_color[second_index]=1; //mark second_max as in_color  
+     draft.players[p_index].in_color[max_index]=1; //mark second_max as in_color
+     draft.players[p_index].in_color[second_index]=1; //mark second_max as in_color
   }
 
   top_colors = [max_index, second_index];
-  
+
   return top_colors;
 }
 
@@ -370,22 +370,22 @@ var sort_two = function() {
   //update which cards on are color
   top_colors=update_in_color(player_i);
   pack_length=draft.players[player_i].pack.pack_contents.length;
-  
+
   //figure out how many colors the player is commited to
   player_colors=0;
   for (var j=0; j<5; j++){
     if(draft.players[player_i].color_commit[j]>color_commit_threshold){
       player_colors=player_colors+1;
-    } 
+    }
   }
 
   //For each card in the pack
   for (i = 0; i < pack_length; i++) {
-    
+
     //grab the card
     this_card=draft.players[player_i].pack.pack_contents[i];
     cur_bias=0;
-    
+
     //check if card is on color
     var on_color_card=1;
     var off_color_amount=0;
@@ -394,7 +394,7 @@ var sort_two = function() {
         on_color_card=0;
         off_color_amount+=this_card.colors[xx];
       }
-    }  
+    }
 
     //check number of colors
     var num_colors=0;
@@ -403,9 +403,9 @@ var sort_two = function() {
           num_colors+=1;
       }
     }
-    
+
     denom=color_commit_threshold / .9; //maximum .6 bonus during speculation phase
-    
+
      //First, handle committed to 2 colors case
      if(num_colors==2){
        if (on_color_card==1){
@@ -414,13 +414,13 @@ var sort_two = function() {
        cur_bias=-1.0*(off_color_amount-1); //bigger bias for off color cards later
        }
 
-     } else {      
+     } else {
        //Speculation phase, 4 cases:
        //mono-colored card 0 color
        //mono-colored card 1 color (cap bonus)
        //artifact (set at max bonus)
        //multicolored - sum of max 2 bonus - sum of other colors
-       
+
        //dummy initialize
        cur_bias=-.2;
 
@@ -431,7 +431,7 @@ var sort_two = function() {
 	   num_card_colors+=1;
          }
        }
-     
+
 
        //check number of colors
        num_player_colors=0;
@@ -441,11 +441,11 @@ var sort_two = function() {
          }
        }
 
-     
+
        //0-color (artifact) case
        if (num_card_colors==0){
 
-      
+
          //get maximum color commitment
          max_value=draft.players[player_i].color_commit[0];
          for(var k=1;k<5;k++){
@@ -454,14 +454,14 @@ var sort_two = function() {
              max_value=cur_commit;
            }
          }
-         
+
          //set current bias to maximum current bias
-	 if (num_player_colors>1){	 
+	 if (num_player_colors>1){
            cur_bias = Math.min(color_commit_threshold/(1.0*denom), max_value/(1.0*denom));
          } else {
            cur_bias=0;
 	 }
-       
+
        }
 
        //1-color (mono-colored) case
@@ -474,7 +474,7 @@ var sort_two = function() {
              color_index=jj;
 	   }
 	 }
-	 
+
 	 //set the current bias as capped bonus
 	 cur_bias = Math.min( color_commit_threshold/(1.0*denom),  draft.players[player_i].color_commit[color_index]/(1.0*denom));
 	 //if committed to only one color, reduce bias by factor of 2
@@ -482,7 +482,7 @@ var sort_two = function() {
            cur_bias=cur_bias/2.0;
 	 }
 
-	 
+
 	 //if committed to one color, give a bonus to the best second color
 	 second_color_frac=.80;
 	 if (player_colors==1 && (color_index==top_colors[1]) && draft.players[player_i].color_commit[color_index]>0){
@@ -493,7 +493,7 @@ var sort_two = function() {
 
        //2-3 color (multicolored)
        if (num_card_colors==2 || num_card_colors==3){
-         
+
 	 //compute (on-color commit)-(off-color commit)
          on_color_amount=0;
 	 for (var k=0; k<5; k++){
@@ -516,11 +516,11 @@ var sort_two = function() {
        }
      }
 
-     
+
      //update color bias
      this_card.color_bias=cur_bias;
      //Changing value from my_rating to myrating
-     this_card.value=parseFloat(this_card.color_bias)+parseFloat(this_card.myrating); 
+     this_card.value=parseFloat(this_card.color_bias)+parseFloat(this_card.myrating);
   }
   return;
 }
@@ -529,7 +529,7 @@ function move_2_deck(p, col_index){
   //pick the card and remove it from the pack
   draft.players[p].deck.push(draft.players[p].collection[col_index]);
   draft.players[p].collection.splice(col_index,1)
-  
+
   //autosort deck
   var total_cards=draft.players[p].deck.length+draft.players[p].basiclands.length
   //if (total_cards==40){
@@ -537,7 +537,7 @@ function move_2_deck(p, col_index){
       draft.players[p].deck= sortByMultiple ( draft.players[p].deck, ["creaturesort", "cmc", "name"]);
 
  //}
- // 
+ //
   //update player deck text
   if(p==0){
     deck_text();
@@ -554,7 +554,7 @@ function move_2_collection(p, deck_index){
   //update player deck text
   if(p==0){
     deck_text();
-  } 
+  }
 }
 
  function remove_land(p, land_index){
@@ -567,14 +567,14 @@ function move_2_collection(p, deck_index){
  function get_color_code(vec){
 
 //count colors in the card
-var num_colors=0; 
+var num_colors=0;
 for(var x=0; x<5; x++){
   if(vec[x]>0){
     num_colors++;
   }
 }
 
-//return color for mono-colored, brown otherwise 
+//return color for mono-colored, brown otherwise
 if (num_colors<1){
   return '#E0D6CC';  //opaque
 } else if (num_colors>1){
@@ -594,7 +594,7 @@ if (num_colors<1){
 //safety
 return '#CCB299';  //brown
 
-} 
+}
 
  function check_oncolor(card_colors, player_colors){
   //check if card is on color
@@ -605,7 +605,7 @@ return '#CCB299';  //brown
       on_color_card=0;
       //off_color_amount+=this_card.colors[xx];
     }
-  } 
+  }
   return on_color_card;
 }
 
@@ -626,15 +626,15 @@ return '#CCB299';  //brown
 
   //evenly as possible on lands
   lands_to_add=40-draft.players[pn].deck.length
-  
+
   //determine top color in deck
-  max_index=0;	  
+  max_index=0;
   for (var y=1; y<5; y++){
     if(deck_colors[y]>deck_colors[max_index]){
       max_index=y;
     }
   }
-  
+
   //determine secondary color
   second_max_index=0;
   if (max_index==0){second_max_index=1;}
@@ -664,13 +664,13 @@ function clear_deck(pn){
 
   //clear lands
   draft.players[pn].basiclands=[]
-  
+
   //clear deck
   while(draft.players[pn].deck.length>0 && it<300){
     move_2_collection(pn, 0);
     it++;
   }
- 
+
 
   draft.players[0].collection= sortByMultiple ( draft.players[0].collection, ["colorsort", "creaturesort", "cmc", "name"]);
 
@@ -693,7 +693,7 @@ function autobuild(pn, colors){
   deck_length=draft.players[pn].deck.length
   for (var j=0; j<deck_length; j++){
     var deck_card=draft.players[pn].deck[j];
-    for (var i = 0; i < 5; i++) {     
+    for (var i = 0; i < 5; i++) {
       if(deck_card.colors[i]>0){
         deck_colors[i]+=1;
       }
@@ -728,18 +728,18 @@ function autobuild(pn, colors){
     //best card
     var max_rating=0;
     var max_index=0;
-    
+
     //check each card in collection
     collection_length = draft.players[pn].collection.length;
     for (i = 0; i <collection_length; i++) {
-	  
-      //compute and update ratings here;	  
+
+      //compute and update ratings here;
       var card_rating=parseFloat(draft.players[pn].collection[i].myrating);
       card_colors=draft.players[pn].collection[i].colors;
 
       //update best card
       //if (card_rating>max_rating && !isNaN(card_rating)){
-      
+
       if (card_rating>max_rating && !isNaN(card_rating) && (check_oncolor(card_colors, colors)>0)){
         max_rating=card_rating;
         max_index=i;
@@ -748,18 +748,18 @@ function autobuild(pn, colors){
 
     //add the best card if possible
     if (max_rating > 0){
-      //account for lands	    
+      //account for lands
       if(draft.players[pn].collection[max_index].type=="Land" || draft.players[pn].collection[max_index].type=="land"){
         num_lands++;
       }
 
-      move_2_deck(pn, max_index); 
+      move_2_deck(pn, max_index);
     }else{
       cont=0;
     }
-    
-   }    
-  
+
+   }
+
 
   //now add lands, non-basics not addressed
   seventeen_lands(pn);
@@ -778,7 +778,7 @@ function autobuild(pn, colors){
 
 //slow to display
 function autobuild_bots(){
-  for (var pn=1; pn<num_players; pn++){  
+  for (var pn=1; pn<num_players; pn++){
     autobuild(pn,draft.players[pn].in_color);
   }
   Print_collection();
@@ -795,9 +795,9 @@ function uniq(a) {
 //print deck text
 function deck_text(){
 
-  var total_cards=draft.players[0].deck.length+draft.players[0].basiclands.length   
+  var total_cards=draft.players[0].deck.length+draft.players[0].basiclands.length
   if(total_cards<40){
-    document.getElementById("deck_text").innerHTML="";    
+    document.getElementById("deck_text").innerHTML="";
     document.getElementById("deck_text").style.display="none"
     return;
   }
@@ -826,7 +826,7 @@ function deck_text(){
 
   //get a unique array
   unique_array=uniq(your_array);
-  
+
   //for element in array
   cur_html="//Deck from draftsim.com<br>";
   array_length=unique_array.length;
@@ -845,25 +845,27 @@ function Print_collection(){
  //Clear images
  pack_length = draft.players[0].pack.pack_contents.length;
  document.getElementById("pack_images").innerHTML = "";
- 
+
  //Set visibilities properly
  var cards_picked = draft.players[0].collection.length + draft.players[0].deck.length;
  if (cards_picked==0){
    show_bot_decks=0;
  }
- 
+
  if (cards_picked>=3*pack_size){
-  draft_end_visibility(); 
+  draft_end_visibility();
  } else {
   draft_start_visibility();
- } 
- 
+ }
 
-<<<<<<< HEAD
- //Set up pack card images properly 
-=======
- //Set up pack card images properly
->>>>>>> origin/master
+
+// HEAD
+// Set up pack card images properly
+//=======
+// Set up pack card images properly
+// origin/master
+
+
  for (i = 0; i < pack_length; i++) {
    var cur_html = document.getElementById("pack_images").innerHTML;
 
@@ -886,14 +888,14 @@ function Print_collection(){
  }
 
 
-// Find a <table> element 
+// Find a <table> element
 var tablep = document.getElementById("pack_text");
 tablep.innerHTML=""; //clear the table
 
 //create an array of values
 var values=[];
 for (k=0;k<pack_length; k++){
-  cur_card=draft.players[0].pack.pack_contents[k];      
+  cur_card=draft.players[0].pack.pack_contents[k];
 	values.push((parseFloat(cur_card.myrating) + parseFloat(cur_card.color_bias)));
 }
 
@@ -920,12 +922,12 @@ var rows_2_show = Math.min(pack_length, 15); //no min
    var row = tablep.insertRow(i);
    var cell1 = row.insertCell(0);
    var cell2 = row.insertCell(1);
-   var cell3 = row.insertCell(2);   
+   var cell3 = row.insertCell(2);
    var cell4 = row.insertCell(3);
-   
+
 
    row.onclick="make_pick(" + i + ")";
-   
+
 
    // Add some text to the new cells:
    var cur_card = draft.players[0].pack.pack_contents[indexes[i]];
@@ -934,13 +936,13 @@ var rows_2_show = Math.min(pack_length, 15); //no min
    cell1.innerHTML = "<li style='min-width:400px;background-color:" +cur_color+ "'; onclick=make_pick(" + indexes[i] + ")>" + cur_card.name.replace("_", ' ').replace("_", ' ').replace("_", ' ').replace("_", ' ').replace("_", ' ').replace("_", ' ') + "</li>";
    cell2.innerHTML = cur_card.myrating;
    if (cur_card.hasOwnProperty('color_bias')){
-     
-     if (cur_card.color_bias>=0){	   
+
+     if (cur_card.color_bias>=0){
        cell3.innerHTML = "+" + cur_card.color_bias.toFixed(1).replace(/^0+/, '');
      } else {
        cell3.innerHTML = cur_card.color_bias.toFixed(1).replace(/^0+/, '');
      }
-   
+
    } else {
      cell3.innerHTML="0";
     }
@@ -982,11 +984,11 @@ if(draft.players[0].pack.pack_contents.length==0){
  if (typeof sort_collection !== "undefined"){
    //sort by color
    if (sort_collection == 1){
-     draft.players[0].collection= sortByMultiple ( draft.players[0].collection, ["colorsort", "creaturesort", "cmc", "name"]);         
+     draft.players[0].collection= sortByMultiple ( draft.players[0].collection, ["colorsort", "creaturesort", "cmc", "name"]);
    }
    //sort by CMC
    //if (sort_collection == 2){
-   //  draft.players[0].collection= sortByMultiple ( draft.players[0].collection, ["creaturesort", "cmc", "name"]);     
+   //  draft.players[0].collection= sortByMultiple ( draft.players[0].collection, ["creaturesort", "cmc", "name"]);
    //}
  }
 
@@ -1009,7 +1011,7 @@ if(draft.players[0].pack.pack_contents.length==0){
  }
 
  document.getElementById("deck_img").innerHTML = "";
- for (var pn=0; pn<num_players; pn++){ 
+ for (var pn=0; pn<num_players; pn++){
 
    deck_length=draft.players[pn].deck.length
    for (var i = 0; i < deck_length; i++) {
@@ -1026,11 +1028,11 @@ if(draft.players[0].pack.pack_contents.length==0){
  }
 
  //display lands in the deck here
- for (var pn=0; pn<num_players; pn++){  
+ for (var pn=0; pn<num_players; pn++){
    lands_length=draft.players[pn].basiclands.length
    for (var i = 0; i < lands_length; i++) {
      var cur_card = draft.players[pn].basiclands[i];
-     
+
      //card images
      if (typeof cur_card != "undefined"){ //make sure card isnt undefined
        var cur_html = document.getElementById("deck_img").innerHTML;
@@ -1046,7 +1048,7 @@ if(draft.players[0].pack.pack_contents.length==0){
  if ( (typeof show_bot_decks != "undefined") && show_bot_decks==1){
    for (var bot_num=1; bot_num<num_players; bot_num++){
      bot_collection_length=draft.players[bot_num].collection.length
-   
+
      document.getElementById("bot_collection_img").innerHTML = document.getElementById("bot_collection_img").innerHTML + "<br>" + "Bot" + bot_num + ":" + "<br>";
      for (var i = 0; i < bot_collection_length; i++) {
        var cur_card = draft.players[bot_num].collection[i];
@@ -1085,20 +1087,20 @@ function make_pick(card_index){
  if(card_index >= pack_length){
   return 0;
 } else {
-  
+
   //update color commitment
-  for (i = 0; i < 5; i++) { 
+  for (i = 0; i < 5; i++) {
     if(draft.players[0].pack.pack_contents[card_index].colors[i]>0){
       draft.players[0].color_commit[i]+=Math.max(0,draft.players[0].pack.pack_contents[card_index].myrating-rating_thresh);
     }
   }
-  
+
   //pick the card and remove it from the pack
   draft.players[0].collection.push(draft.players[0].pack.pack_contents[card_index]);
   draft.players[0].pack.pack_contents.splice(card_index,1);
 
 //bots make picks
-for (jj = 1; jj < num_players; jj++) { 
+for (jj = 1; jj < num_players; jj++) {
   bot_pick(jj);
 }
 
@@ -1107,14 +1109,14 @@ var cards_picked = draft.players[0].collection.length + draft.players[0].deck.le
 if (cards_picked <= pack_size-1){   //pass left
   pass_cards(+1);
 } else if (cards_picked == pack_size) { //generate pack 2
- for (i = 0; i < num_players; i++) { 
+ for (i = 0; i < num_players; i++) {
   var pack_2=new Pack(draft.set2);
   draft.players[i].pack=pack_2;
  }
 } else if (cards_picked <= 2*pack_size-1) {  //pass right
   pass_cards(-1);
 } else if (cards_picked == 2 * pack_size) {   //generate pack 3
- for (i = 0; i < num_players; i++) { 
+ for (i = 0; i < num_players; i++) {
   var pack_3=new Pack(draft.set3);
   draft.players[i].pack=pack_3;
  }
@@ -1140,42 +1142,42 @@ function preload_bot_images(bot) {
 //Pass cards to left or right (+1,-1)
 function pass_cards(pass_amount){
   var tmp_packs=['1', '2', '3', '4', '5', '6', '7', '8']; //dummy initialization
-  
+
   //don't pass for now
-  
+
   //put cards in tmp_packs
   for (i=0; i<num_players; i++){
    var p_index = ((i+pass_amount)+ num_players) % num_players;
    tmp_packs[p_index] = draft.players[i].pack;
   }
-  
+
   //return packs to the draft
   for (i=0; i<num_players; i++){
     draft.players[i].pack=tmp_packs[i];
   }
-  
+
   //Bot images loaded when current pack is done loading
   //The bot that's going to pass to the player next
   //var next_bot_index = (num_players - pass_amount) % num_players;
   //preload_bot_images(draft.players[next_bot_index]);
-  
+
 }
 
  function bot_pick(bot_index){
 
  //update biases for bot
- update_bias_pack(bot_index); 
- 
- //output to screen 
+ update_bias_pack(bot_index);
+
+ //output to screen
  var pack_length=draft.players[bot_index].pack.pack_contents.length;
- 
+
  //determine the highest rated card
  var best_rating=0;
  var best_index=0;
- for (var i = 0; i < pack_length; i++) { 
+ for (var i = 0; i < pack_length; i++) {
    //define the current card
    this_card=draft.players[bot_index].pack.pack_contents[i];
-   
+
    //define the current card value
    this_card.value=parseFloat(this_card.myrating)+parseFloat(this_card.color_bias);
    var cur_rating = parseFloat(this_card.value);
@@ -1186,35 +1188,35 @@ function pass_cards(pass_amount){
     best_index=i;
    }
  }
- 
+
   //get the picked card
   var picked_card=draft.players[bot_index].pack.pack_contents[best_index];
 
   //update color commitment
-  for (i = 0; i < 5; i++) { 
+  for (i = 0; i < 5; i++) {
     if(picked_card.colors[i]>0){
       draft.players[bot_index].color_commit[i]+=Math.max(0,picked_card.myrating-rating_thresh);
     }
   }
 
- //choose the card 
+ //choose the card
   draft.players[bot_index].collection.push(draft.players[bot_index].pack.pack_contents[best_index]); //pick the card
   draft.players[bot_index].pack.pack_contents.splice(best_index,1); //remove from pack
- 
+
 }
 
  function Draft_DTK(){
   draft = new Draft(DTK, DTK, FRF, 8);
   Print_collection();
-} 
+}
 
  function Sealed_ORI(){
   draft = new Draft(ORI, ORI, ORI, 1);
   draft.players[0].pack.pack_contents=[];
-  
+
   for (var i=0; i<6; i++){
     cur_pack=new Pack(ORI);
-    while(cur_pack.pack_contents.length>0){	    
+    while(cur_pack.pack_contents.length>0){
       //pick the card and remove it from the pack
       draft.players[0].collection.push(cur_pack.pack_contents[0]);
       cur_pack.pack_contents.splice(0,1);
@@ -1226,22 +1228,22 @@ function pass_cards(pass_amount){
   for (var j = 0; j<collection_length; j++){
     //update color commitment
     cur_card=draft.players[0].collection[j];
-    for (i = 0; i < 5; i++) { 
+    for (i = 0; i < 5; i++) {
       if(cur_card.colors[i]>0){
         draft.players[0].color_commit[i]+=Math.max(0,cur_card.myrating-rating_thresh);
       }
     }
   }
   //update best colors
-  update_in_color(0); 
-  
-  //sort the pool 
+  update_in_color(0);
+
+  //sort the pool
 //  draft.players[0].collection=draft.players[0].collection.sort(sort_two( "colorsort", {name:"cmc", primer: parseFloat, reverse:false}));
   //draft.players[0].collection=draft.players[0].collection.sort(sort_two( "colorsort", {name:"cmc", primer: parseFloat, reverse:false}));
   draft.players[0].collection= sortByMultiple ( draft.players[0].collection, ["colorsort", "creaturesort", "cmc", "name"]);
-   
 
-  
+
+
   //Print the deck
   Print_collection();
 
@@ -1250,7 +1252,7 @@ function pass_cards(pass_amount){
  function Draft_ORI(){
   draft = new Draft(ORI, ORI, ORI, 8);
   Print_collection();
-} 
+}
 
 
 function getParameterByName(name) {
@@ -1271,10 +1273,17 @@ window.onload = function(){
   } else {
     document.getElementById("debug").innerHTML="Use the navigation bar above";
   }
+            var md = document.getElementById("chart-area").getContext("2d");
+            window.myPie = new Chart(md).Pie(pieData);
+
+            var mc = document.getElementById("canvas").getContext("2d");
+            window.myBar = new Chart(mc).Bar(barChartData, {
+                responsive : true
+            });
+
 };
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
+// <<<<<<< HEAD
+// =======
+// >>>>>>> origin/master
