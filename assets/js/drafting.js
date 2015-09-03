@@ -856,6 +856,7 @@ function Print_collection(){
   draft_end_visibility();
  } else {
   draft_start_visibility();
+<<<<<<< HEAD:assets/js/drafting.js
  }
 
 
@@ -866,6 +867,12 @@ function Print_collection(){
 // origin/master
 
 
+=======
+ } 
+ 
+
+ //Set up pack card images properly 
+>>>>>>> master:drafting.js
  for (i = 0; i < pack_length; i++) {
    var cur_html = document.getElementById("pack_images").innerHTML;
 
@@ -1273,6 +1280,7 @@ window.onload = function(){
   } else {
     document.getElementById("debug").innerHTML="Use the navigation bar above";
   }
+<<<<<<< HEAD:assets/js/drafting.js
             var md = document.getElementById("chart-area").getContext("2d");
             window.myPie = new Chart(md).Pie(pieData);
 
@@ -1287,3 +1295,6 @@ window.onload = function(){
 // <<<<<<< HEAD
 // =======
 // >>>>>>> origin/master
+=======
+};
+>>>>>>> master:drafting.js
