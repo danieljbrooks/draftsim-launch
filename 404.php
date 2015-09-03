@@ -1,16 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
     <head>
     <title>Draftsim - MTG Origins Draft and Sealed Simulator - Page not found</title>
     <?php include 'includes/header.php'; ?>
-=======
-<head>
-<title> Draftsim - MTG Draft and Sealed Simulator - Page not found </title>
-
-<?php include 'css.html'; ?>
-
->>>>>>> master
 </head>
 
 <body>
