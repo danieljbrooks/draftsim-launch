@@ -61,9 +61,11 @@
   if(display_element.style.display == 'none'){
     display_element.style.display = 'inline';
     display_element.style.minHeight= '200px';
+    $(".card_overlay").toggle();//jQuery call that shows overlays
   } else {
     display_element.style.display= 'none';
     display_element.style.minHeight= '0px';
+    $(".card_overlay").toggle(); //jQuery call that hides overlays
   }
 }
 
@@ -865,9 +867,40 @@ function Print_collection(){
 
    var card = draft.players[0].pack.pack_contents[i];
    var card_name = card.name.replace(/_/g, " ");
-   var extra_html = "<img src=" + card.image +  " alt=\"" + card_name + "\" title=\"" + card_name + "\" "+ "id=card_" + i + " onclick=make_pick(" + i + ") />";
+   
+   //Old 
+   //var extra_html = "<img src=" + card.image +  " alt=\"" + card_name + "\" title=\"" + card_name + "\" "+ "id=card_" + i + " onclick=make_pick(" + i + ") />";
+   //document.getElementById("pack_images").innerHTML = cur_html + extra_html;
 
-   document.getElementById("pack_images").innerHTML = cur_html + extra_html;
+   //New 
+   //the following creates a wrapper <div> around each item item in id=pack_images that contains the <img> as well as another <div> that is set to overlay the <img>
+   // each <img> and overlay <div> have "id="" created based on card name(since each card is unique in a pack) that allows them to be addressable for other functions.  
+   
+
+   //opens outer wrapper <div>. Named after the position in the array card_'i'
+   var c_wrapper_open = "<div id=\"card_" + i + "\" class=\"card_wrapper\">"; 
+  
+   //creates the <img>, assigns id=img_card-s_name. Note that single quote(') is converted to dash(-) in addition to spaces( ) being underscores(_). 
+   //This is to help mitigate interpreation issues when finding IDs. 
+   //these <img>s belong to the card_img CSS class
+   var c_image =  "<img src=" + card.image +  " alt=\"" + card_name + "\" title=\"" + card_name + "\" "+ "id=\"img_" + card.name.replace(/'/g,"-") + "\" class= \"card_img\" onclick= make_pick(" + i + ") />"; 
+
+   //creates the overlay <div>, assigns id=overlay_card-s_name. Note that single quote(') is converted to dash(-) in addition to spaces( ) being underscores(_). 
+   //This is to help mitigate interpreation issues when finding IDs.
+   //These <div>s belond to the card_overlay CSS class
+   var c_overlay = "<div id=\"overlay_" + card.name.replace(/'/g,"-") + "\" class=\"card_overlay\">" + "<p id=rating_" + card.name.replace(/'/g,"-") +" class=\"card_rating_text\">" + (parseFloat(card.myrating) + parseFloat(card.color_bias)).toFixed(1) + "</p>" + "</div>";
+    
+   //Closes the wrapper
+   var c_wrapper_close = "</div>";
+   
+   //write the wrapper <div>s, <img>s, and overlay <div>s to the page 
+   document.getElementById("pack_images").innerHTML = cur_html + c_wrapper_open + c_image + c_overlay + c_wrapper_close;
+   //document.getElementById("overlay_" + card.name.replace(/'/g,"-")).innerHTML = "<p id=rating_" + card.name.replace(/'/g,"-") +" class=\"card_rating_text\">" + (parseFloat(card.myrating) + parseFloat(card.color_bias)).toFixed(1) + "</p>";
+
+ }
+
+ if(document.getElementById('pack_text_container').style.display == 'none'){
+    $(".card_overlay").toggle(); //jQuery if suggestions are turned off this will hide the overlay
  }
 
  //Load next bot images when current ones are finished loading
@@ -941,6 +974,11 @@ var rows_2_show = Math.min(pack_length, 15); //no min
      cell3.innerHTML="0";
     }
    cell4.innerHTML =  (parseFloat(cur_card.myrating) + parseFloat(cur_card.color_bias)).toFixed(1);
+
+   //Writes color adjusted myrating into the card overlay <div> into a <p>, assigns id=rating_card-s_name. Note that single quote(') is converted to dash(-) in addition to spaces( ) being underscores(_). 
+   //This is to help mitigate interpreation issues when finding IDs. 
+   //these <p>s belong to the card_rating_text CSS class
+   
 
  }
   // var cur_html = document.getElementById("pack_images").innerHTML;
