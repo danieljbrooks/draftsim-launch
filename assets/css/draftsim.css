@@ -7,6 +7,10 @@ nav {
     line-height: 30px;
 }
 
+body{
+    text-align  : center;
+}
+
 #pack_images img {
     width: 223px;
     height: 311px;
@@ -44,4 +48,45 @@ ul {
 
 #deck_title {
     font-size: 40px;
+}
+
+.card_wrapper{
+  display: inline-block;
+  position: relative;
+  margin: 3px;
+  
+}
+.card_img{
+  position: relative;
+  z-index: 1;
+  left: 0;
+  top: 0;
+
+}
+.card_overlay{
+  position: absolute; 
+  display: table;
+  z-index: 2;
+  top: 35px;
+  left: 18px;
+  right:0;
+  width: 187px;
+  height: 138px;
+  background-color: rgba(255,255,255,.70);
+  text-align: middle;
+  pointer-events: none; /*enables onclick to pass through overlay */
+}
+
+.card_rating_text{
+  text-align:center; 
+  vertical-align: middle;
+  display: table-cell;
+  font-size: 90px;
+  padding-bottom: 0px;
+  color: rgba(0,0,0,.75);
+  pointer-events: none; /*enables onclick to pass through text*/
+  }
+
+  .nav li{
+  z-index: 99; /* ensures that the menu stays on top of all other page elements */
 }
