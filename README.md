@@ -6,15 +6,15 @@
 </p>
 
 <h2> Usage </h2>
-<p> This repository features the draftsim source code at launch. 
-  The live version of the site is hosted at: <br>
-  http://draftsim.com.
+<p>
+  The live version of the site is hosted at: http://draftsim.com.
 </p>
 
 <h2> Draftsim Model </h2>
 <p>
-  Additional documentation on the Draftsim model is available at: <br>
-  http://danieljbrooks.com/draftsim_model.html.
+  The Draftsim model maximizes cards quality within a 2-color pair. 
+  It is used for the bot AI, pick recommendations, and automatic deckbuilding. <br>
+  A complete description of the model is available at: http://danieljbrooks.com/draftsim_model.html.
 </p>
 
 <h2> Contents </h2>
