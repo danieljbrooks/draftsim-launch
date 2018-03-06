@@ -7,9 +7,9 @@
 
 <p> This repository is organized into a number of sections.
   The top level directory contains the site's pages: <br>
-  &nbsp;&nbsp;<b>1.</b> draft.php - the page that users draft and construct decks on <br>
-  &nbsp;&nbsp;<b>2.</b> about.php - recent updates and contact information <br>
-  &nbsp;&nbsp;<b>3.</b> methodology.php - describes the Draftsim model <br> 
+  &nbsp;&nbsp;&nbsp;&nbsp;<b>1.</b> draft.php - the page that users draft and construct decks on <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<b>2.</b> about.php - recent updates and contact information <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<b>3.</b> methodology.php - describes the Draftsim model <br> 
   The header, footer, and navigation bar for these pages are located in the /include/ folder. 
   The assets folder stores the images, css, and javascript files used on the site. 
 </p>
