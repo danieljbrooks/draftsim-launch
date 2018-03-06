@@ -5,6 +5,7 @@
   The website also features pick suggestions and automatic deckbuilding. 
 </p>
 
+<h2> Contents </h2>
 <p> This repository is organized into a number of sections. </p>
 <p>
   The repository's top level directory contains a number of webpages:<br>
@@ -19,11 +20,13 @@
   Images, css, and javascript files used throughout out the site are located in the /assets/ folder.  
 </p>
 
+<h2> Draftsim Model </h2>
 <p>
   Additional documentation on the Draftsim model is available at: <br>
   http://danieljbrooks.com/draftsim_model.html.
 </p>
 
+<h2> Usage </h2>
 <p> This repository features the draftsim source code at launch. 
   The live version of the site is hosted at: <br>
   http://draftsim.com.
