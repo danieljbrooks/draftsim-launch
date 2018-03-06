@@ -1,6 +1,6 @@
 <h1>Draftsim</h1>
 
-<p> Draftsim is the leading free tool for Magic: the Gathering draft preparation. 
+<p> Draftsim is the leading free tool for Magic: the Gathering draft preparation with millions of pageviews annually. 
   Users play practice drafts against smart computer opponents. 
   The website also features pick suggestions and automatic deckbuilding. 
 </p>
