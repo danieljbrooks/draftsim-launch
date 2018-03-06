@@ -18,9 +18,11 @@
 </p>
 
 <p>
-  Additional documentation on the Draftsim model is available at: http://danieljbrooks.com/draftsim_model.html.
+  Additional documentation on the Draftsim model is available at: <br>
+  http://danieljbrooks.com/draftsim_model.html.
 </p>
 
 <p> This repository features the draftsim source code at launch. 
-  The live version of the site is currently live at http://draftsim.com.
+  The live version of the site is currently live at: <br>
+  http://draftsim.com.
 </p>
