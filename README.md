@@ -7,7 +7,7 @@
 
 <p> This repository is organized into a number of sections. </p>
 <p>
-  The site's pages are stored in the top level directory:<br>
+  The repository's top level directory contains a number of webpages:<br>
   &nbsp;&nbsp;&nbsp;&nbsp;<b>1.</b> draft.php - drafting and deck construction <br>
   &nbsp;&nbsp;&nbsp;&nbsp;<b>2.</b> about.php - website overview and recent updates <br>
   &nbsp;&nbsp;&nbsp;&nbsp;<b>3.</b> methodology.php - description of Draftsim Model <br> 
@@ -16,7 +16,7 @@
   The header, footer, and navigation bar for these pages are located in the /include/ folder.
 </p>
 <p>
-  The assets folder stores the images, css, and javascript files used throughout the site.  
+  Images, css, and javascript files used throughout out the site are located in the /assets/ folder.  
 </p>
 
 <p>
@@ -25,6 +25,6 @@
 </p>
 
 <p> This repository features the draftsim source code at launch. 
-  The live version of the site is currently live at: <br>
+  The live version of the site is hosted at: <br>
   http://draftsim.com.
 </p>
