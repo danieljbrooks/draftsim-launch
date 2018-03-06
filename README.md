@@ -13,8 +13,10 @@
 <h2> Draftsim Model </h2>
 <p>
   The Draftsim model maximizes cards quality within a 2-color pair. 
-  It is used for the bot AI, pick recommendations, and automatic deckbuilding. <br>
-  A complete description of the model is available at: http://danieljbrooks.com/draftsim_model.html.
+  It is used for the bot AI, pick recommendations, and automatic deckbuilding. 
+</p>
+<p>
+  A complete description of the Draftsim model is available at: http://danieljbrooks.com/draftsim_model.html.
 </p>
 
 <h2> Contents </h2>
