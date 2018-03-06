@@ -9,7 +9,11 @@
   &nbsp;&nbsp;&nbsp;&nbsp;<b>1.</b> draft.php - drafting and deck construction <br>
   &nbsp;&nbsp;&nbsp;&nbsp;<b>2.</b> about.php - website overview and recent updates <br>
   &nbsp;&nbsp;&nbsp;&nbsp;<b>3.</b> methodology.php - description of Draftsim Model <br> 
-  The header, footer, and navigation bar for these pages are located in the /include/ folder. 
+</p>
+<p>
+  The header, footer, and navigation bar for these pages are located in the /include/ folder.
+</p>
+<p>
   The assets folder stores the images, css, and javascript files used throughout the site.  
 </p>
 
