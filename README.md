@@ -5,13 +5,12 @@
   The website also features pick suggestions and automatic deckbuilding. 
 </p>
 
-<p> This repository is organized into a number of sections.
-  The top level directory contains the site's pages: <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;<b>1.</b> draft.php - the page that users draft and construct decks on <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;<b>2.</b> about.php - recent updates and contact information <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;<b>3.</b> methodology.php - describes the Draftsim model <br> 
+<p> This repository is organized into a number of sections. <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<b>1.</b> draft.php - drafting and deck construction <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<b>2.</b> about.php - website overview and recent updates <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<b>3.</b> methodology.php - description of Draftsim Model <br> 
   The header, footer, and navigation bar for these pages are located in the /include/ folder. 
-  The assets folder stores the images, css, and javascript files used on the site. 
+  The assets folder stores the images, css, and javascript files used throughout the site.  
 </p>
 
 <p>
@@ -21,4 +20,3 @@
 <p> This repository features the draftsim source code at launch. 
   The live version of the site is currently live at http://draftsim.com.
 </p>
-U
