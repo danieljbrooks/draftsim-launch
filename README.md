@@ -7,7 +7,7 @@
 
 <p> This repository is organized into a number of sections. </p>
 <p>
-  The site's pages are stored in the top level directory:
+  The site's pages are stored in the top level directory:<br>
   &nbsp;&nbsp;&nbsp;&nbsp;<b>1.</b> draft.php - drafting and deck construction <br>
   &nbsp;&nbsp;&nbsp;&nbsp;<b>2.</b> about.php - website overview and recent updates <br>
   &nbsp;&nbsp;&nbsp;&nbsp;<b>3.</b> methodology.php - description of Draftsim Model <br> 
